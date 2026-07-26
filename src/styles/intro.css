@@ -1,0 +1,94 @@
+/* ============================= */
+/* Floating Hearts */
+/* ============================= */
+
+.floating-heart {
+  position: absolute;
+  bottom: -80px;
+  color: rgba(255, 70, 120, 0.9);
+  pointer-events: none;
+  user-select: none;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 80, 140, 0.8))
+    drop-shadow(0 0 18px rgba(255, 80, 140, 0.5));
+
+  animation-name: floatHeart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-140vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+/* ============================= */
+
+.photoGlow{
+
+    animation:glow 4s ease-in-out infinite;
+
+}
+
+@keyframes glow{
+
+0%,100%{
+
+transform:scale(1);
+
+opacity:.45;
+
+}
+
+50%{
+
+transform:scale(1.15);
+
+opacity:.75;
+
+}
+
+}
+
+
+
+/* ============================= */
+
+.floatImage{
+
+animation:floatImage 5s ease-in-out infinite;
+
+}
+
+@keyframes floatImage{
+
+0%,100%{
+
+transform:translateY(0px) rotate(-3deg);
+
+}
+
+50%{
+
+transform:translateY(-12px) rotate(-2deg);
+
+}
+
+}
