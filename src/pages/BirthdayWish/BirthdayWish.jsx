@@ -93,7 +93,7 @@ function BirthdayWish() {
 
           <div className="btn">
             <button id="btn__letter" type="button" onClick={handleClickHere}>
-              Click here
+              Let's Celebrate
             </button>
           </div>
         </div>
@@ -130,7 +130,8 @@ function BirthdayWish() {
               ))}
             </div>
             <div className="fa-heart">
-              <FaHeart />
+              {/* <FaHeart /> */}
+              ❤️
             </div>
           </div>
         </div>

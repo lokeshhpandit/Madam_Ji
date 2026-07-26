@@ -1,0 +1,40 @@
+/* Firework CSS scoped under .firework-scene */
+.firework-scene, .firework-scene * {
+  box-sizing: border-box;
+}
+.firework-scene {
+  font-family: "Russo One", arial, sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+}
+.firework-scene .hide { opacity: 0; visibility: hidden; }
+.firework-scene .remove { display: none !important; }
+.firework-scene .blur { filter: blur(12px); }
+.firework-scene .container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.firework-scene .stage-container {
+  overflow: hidden;
+  border: 1px solid #222;
+  margin: -1px;
+}
+.firework-scene .canvas-container {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.3s;
+  position: relative;
+}
+.firework-scene .canvas-container canvas {
+  position: absolute;
+  mix-blend-mode: lighten;
+  transform: translateZ(0);
+}
+/* Hide all UI overlays completely */
+.firework-scene .loading-init,
+.firework-scene .controls,
+.firework-scene .menu,
+.firework-scene .help-modal {
+  display: none !important;
+}

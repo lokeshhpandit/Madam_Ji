@@ -1,0 +1,315 @@
+.catch-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(
+    1200px 600px at 50% 20%,
+    #ffe0ec 0%,
+    #ffd0e0 30%,
+    #f7bcd6 60%,
+    #e9a6c9 100%
+  );
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+}
+
+/* Decorative background hearts */
+.catch-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.catch-decor-heart {
+  position: absolute;
+  bottom: -40px;
+  animation-name: catchFloatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes catchFloatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-10px) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+/* Card */
+.catch-card-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 520px;
+}
+
+.catch-card {
+  position: relative;
+  background: linear-gradient(180deg, #fff4f8 0%, #ffe6ef 100%);
+  border-radius: 22px;
+  padding: 36px 32px 28px;
+  box-shadow:
+    0 30px 60px -20px rgba(219, 39, 119, 0.35),
+    0 15px 30px -10px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: catchCardFloat 6s ease-in-out infinite;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.catch-card--reveal {
+  transform: scale(1.02);
+}
+
+@keyframes catchCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.catch-title {
+  font-family: 'Great Vibes', 'Dancing Script', cursive;
+  font-size: 44px;
+  color: #2a1a20;
+  margin: 0 0 8px;
+  line-height: 1.1;
+  font-weight: 400;
+  text-align: left;
+}
+
+.catch-subtitle {
+  color: #4a2e3a;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 22px;
+  text-align: left;
+}
+
+.catch-counter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.catch-counter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a2e3a;
+}
+
+.catch-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 77, 122, 0.15);
+  overflow: hidden;
+}
+
+.catch-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff8fb1, #ff4d7a);
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Play area with the moving heart */
+.catch-play-area {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 233, 240, 0.4)
+  );
+  border: 1px dashed rgba(255, 77, 122, 0.25);
+  overflow: hidden;
+}
+
+.catch-heart-btn {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 18px rgba(255, 77, 122, 0.35),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.04);
+  transition: top 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.2s ease, box-shadow 0.2s ease;
+  transform: translate(-50%, -50%);
+  will-change: top, left, transform;
+}
+
+.catch-heart-btn:hover {
+  box-shadow: 0 12px 24px rgba(255, 77, 122, 0.45);
+}
+
+.catch-heart-btn--pop {
+  transform: translate(-50%, -50%) scale(1.35);
+}
+
+.catch-heart-emoji {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catch-heart-spark {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+}
+
+/* Reveal state */
+.catch-reveal {
+  text-align: center;
+  animation: catchRevealIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes catchRevealIn {
+  0% { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.catch-reveal-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.catch-reveal-title {
+  font-family: 'Great Vibes', 'Dancing Script', cursive;
+  font-size: 52px;
+  color: #ff4d7a;
+  margin: 0 0 12px;
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+.catch-reveal-message {
+  color: #4a2e3a;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 auto 16px;
+  max-width: 380px;
+}
+
+.catch-reveal-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #7a4a5e;
+  font-size: 12px;
+  font-style: italic;
+  margin: 0 0 20px;
+}
+
+.catch-reveal-actions {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.catch-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff4d7a;
+  color: #ffffff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(255, 77, 122, 0.35);
+  transition: transform 0.25s ease, background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.catch-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #ff3366;
+  box-shadow: 0 10px 22px rgba(255, 77, 122, 0.45);
+}
+
+.catch-btn-ghost {
+  background: transparent;
+  color: #ff4d7a;
+  border: 1px solid rgba(255, 77, 122, 0.4);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.catch-btn-ghost:hover {
+  background: rgba(255, 77, 122, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Confetti */
+.catch-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.catch-confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 8px;
+  height: 3px;
+  border-radius: 2px;
+  animation-name: catchConfettiFall;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes catchConfettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.85;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .catch-card { padding: 28px 22px 22px; }
+  .catch-title { font-size: 36px; }
+  .catch-reveal-title { font-size: 44px; }
+  .catch-play-area { height: 220px; }
+}
