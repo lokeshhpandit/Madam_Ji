@@ -13,9 +13,12 @@ import GiftFour from "../pages/Gift/GiftFour";
 import LastThing from "../pages/LastThing/LastThing";
 import Letter from "../pages/Letter/Letter";
 import Love from "../pages/Love/Love";
+import HeartCursorTrail from "../components/HeartCursorTrail/HeartCursorTrail.jsx";
 
 function AppRoutes() {
   return (
+    <>
+    <HeartCursorTrail />
     <Routes>
 
       <Route path="/" element={<IntroPage />} />
@@ -45,6 +48,7 @@ function AppRoutes() {
       <Route path="/love" element={<Love />} />
 
     </Routes>
+    </>
   );
 }
 

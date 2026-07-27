@@ -1,23 +1,38 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Gifts.css";
+import HeartCursorTrail from "../../components/HeartCursorTrail/HeartCursorTrail";
 
 const GIFTS = [
-  { id: 1, color: "#ff6b9d", ribbon: "#fff1c1", emoji: "💖", message: "You are loved beyond measure." },
-  { id: 2, color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟", message: "May all your wishes come true this year!" },
-  { id: 3, color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂", message: "A slice of joy, just for you." },
-  { id: 4, color: "#ffb347", ribbon: "#ffe0f0", emoji: "🎈", message: "Sending you a bouquet of happy moments." },
-  { id: 5, color: "#8ed6a1", ribbon: "#ffd6e0", emoji: "🦄", message: "Keep sparkling like the magical soul you are." },
-  { id: 6, color: "#ff8fab", ribbon: "#fff1c1", emoji: "🍰", message: "Life is short — eat cake first!" },
+  { id: 1, path: "/gift-one",   color: "#ff6b9d", ribbon: "#fff1c1", emoji: "💖" },
+  { id: 2, path: "/gift-two",   color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟" },
+  { id: 3, path: "/gift-three", color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂" },
+  { id: 4, path: "/gift-four",  color: "#ffb347", ribbon: "#ffe0f0", emoji: "🎈" },
 ];
 
+// Message split into lines, then lines split into words for staggered drop-in
+const MESSAGE_LINES = [
+  "Inside these gifts is my love, my prayers & my forever smile for you......",
+  "Each little box carries a tiny piece of my heart,",
+  "wrapped with wishes that will keep you glowing, no matter how far apart. 💫",
+];
+
+/* ------------------------------------------------------------
+   Module-level state (lives OUTSIDE the component):
+   - Navigating between routes preserves it (JS module stays alive).
+   - A full page refresh reloads the module -> Set is empty again.
+   ------------------------------------------------------------ */
+const openedGifts = new Set();
+
 function GiftBox({ gift, opened, onOpen }) {
+
   return (
+    
     <button
       type="button"
       className={`gift ${opened ? "gift--opened" : ""}`}
       style={{ "--gift-color": gift.color, "--gift-ribbon": gift.ribbon }}
-      onClick={() => onOpen(gift.id)}
+      onClick={() => onOpen(gift)}
       data-testid={`gift-box-${gift.id}`}
       aria-label={`Open gift ${gift.id}`}
     >
@@ -31,12 +46,8 @@ function GiftBox({ gift, opened, onOpen }) {
       </div>
       <div className="gift__box">
         <div className="gift__ribbon-v" />
-        <div
-          className="gift__reveal"
-          data-testid={`gift-reveal-${gift.id}`}
-        >
-          <span className="gift__emoji" aria-hidden="true">{gift.emoji}</span>
-          <span className="gift__message">{gift.message}</span>
+        <div className="gift__peek" aria-hidden="true">
+          <span className="gift__emoji">{gift.emoji}</span>
         </div>
       </div>
       <div className="gift__shadow" />
@@ -44,24 +55,52 @@ function GiftBox({ gift, opened, onOpen }) {
   );
 }
 
+/* Word-by-word drop-in message */
+function DropInMessage() {
+  let wordIndex = 0;
+  return (
+    <div className="gifts-message" data-testid="gifts-message">
+      {MESSAGE_LINES.map((line, lineIdx) => (
+        <p className="gifts-message__line" key={lineIdx}>
+          {line.split(" ").map((word, i) => {
+            const delay = wordIndex * 0.09 + 0.2;
+            wordIndex += 1;
+            return (
+              <span
+                className="gifts-message__word"
+                style={{ animationDelay: `${delay}s` }}
+                key={`${lineIdx}-${i}`}
+              >
+                {word}
+                {i < line.split(" ").length - 1 ? "\u00A0" : ""}
+              </span>
+            );
+          })}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 export default function Gifts() {
   const navigate = useNavigate();
-  const [openedIds, setOpenedIds] = useState(() => new Set());
 
-  const handleOpen = (id) => {
-    setOpenedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+  // Seed React state from the module-level Set so any previously-opened
+  // boxes appear opened when the user comes back to this page.
+  const [openedIds, setOpenedIds] = useState(() => new Set(openedGifts));
+
+  const handleOpen = (gift) => {
+    // 1) Persist the opened state
+    openedGifts.add(gift.id);
+    // 2) Trigger a re-render so the lid animates open
+    setOpenedIds(new Set(openedGifts));
+    // 3) After the lid animation plays, navigate to that gift's page
+    setTimeout(() => navigate(gift.path), 500);
   };
-
-  const openedCount = openedIds.size;
-  const allOpened = openedCount === GIFTS.length;
 
   return (
     <div className="gifts-page" data-testid="gifts-page">
+       <HeartCursorTrail />
       <div className="gifts-page__confetti" aria-hidden="true">
         {Array.from({ length: 40 }).map((_, i) => (
           <span
@@ -87,7 +126,7 @@ export default function Gifts() {
         <button
           type="button"
           className="gifts-back"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/cake")}
           data-testid="gifts-back-button"
         >
           ← Back to the cake
@@ -96,11 +135,11 @@ export default function Gifts() {
           Your Birthday Gifts
         </h1>
         <p className="gifts-subtitle" data-testid="gifts-subtitle">
-          Tap a box to unwrap {allOpened ? "— you opened them all! 🎉" : `(${openedCount}/${GIFTS.length} opened)`}
+          Tap a box to unwrap your surprise ✨
         </p>
       </header>
 
-      <main className="gifts-grid" data-testid="gifts-grid">
+      <main className="gifts-grid gifts-grid--four" data-testid="gifts-grid">
         {GIFTS.map((gift) => (
           <GiftBox
             key={gift.id}
@@ -111,11 +150,7 @@ export default function Gifts() {
         ))}
       </main>
 
-      {allOpened && (
-        <div className="gifts-finale" data-testid="gifts-finale">
-          <p>Every gift is a wish, every wish a hug. Happy Birthday! 🎂</p>
-        </div>
-      )}
+      <DropInMessage />
     </div>
   );
 }

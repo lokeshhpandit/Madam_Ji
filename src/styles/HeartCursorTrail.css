@@ -1,0 +1,43 @@
+/* ============================================================
+   Heart cursor trail
+   Hearts are appended to <body>, positioned at cursor,
+   then float up + fade out with a css animation.
+   ============================================================ */
+.heart-trail {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+  text-shadow:
+    0 0 8px rgba(255, 105, 180, 0.6),
+    0 0 16px rgba(255, 77, 143, 0.35);
+  animation: heart-float var(--life, 1200ms) ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15) rotate(calc(var(--rot, 0deg) * 0.3));
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--drift, 0px)),
+                calc(-50% + var(--rise, -60px)))
+      scale(0.8)
+      rotate(var(--rot, 0deg));
+  }
+}
+
+/* Optional: hide default cursor for extra whimsy — uncomment to enable */
+/*
+* { cursor: none !important; }
+*/
