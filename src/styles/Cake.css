@@ -455,3 +455,137 @@
 .cake-scene .cake__candle:nth-of-type(1) { --flame: 0; }
 .cake-scene .cake__candle:nth-of-type(2) { --flame: 0; }
 .cake-scene .cake__candle:nth-of-type(3) { --flame: 0; }
+
+
+/* ============================================================
+   GIFT PROMPT BOX (append to Cake.css)
+   Sits below the cake with a nice entrance animation.
+   ============================================================ */
+.gift-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translate(-50%, 40px);
+  z-index: 5;
+  pointer-events: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  padding: 24px 36px;
+  min-width: 320px;
+  max-width: 90vw;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  opacity: 0;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.2);
+}
+
+.gift-prompt--visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  animation: gift-prompt-float 4s ease-in-out infinite 1s;
+}
+
+.gift-prompt__text {
+  margin: 0;
+  font-style: italic;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 12px rgba(255, 105, 180, 0.55);
+}
+
+.gift-prompt__button {
+  position: relative;
+  border: 0;
+  cursor: pointer;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d8f 0%, #ff8a3d 50%, #ffcc33 100%);
+  background-size: 200% 200%;
+  box-shadow:
+    0 10px 30px rgba(255, 77, 143, 0.45),
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: gift-btn-gradient 4s ease infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.gift-prompt__button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gift-prompt__button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 16px 40px rgba(255, 77, 143, 0.6),
+    0 0 0 2px rgba(255, 255, 255, 0.25) inset;
+}
+
+.gift-prompt__button:hover::before {
+  opacity: 1;
+}
+
+.gift-prompt__button:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.gift-prompt__sparkle {
+  display: inline-block;
+  animation: gift-sparkle 1.6s ease-in-out infinite;
+}
+
+@keyframes gift-prompt-float {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, -8px); }
+}
+
+@keyframes gift-btn-gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gift-sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%      { transform: scale(1.3) rotate(20deg); opacity: 0.85; }
+}
+
+@media (max-width: 480px) {
+  .gift-prompt { min-width: 260px; padding: 20px 22px; bottom: 6%; }
+  .gift-prompt__text { font-size: 1.1rem; }
+  .gift-prompt__button { font-size: 0.9rem; padding: 12px 22px; }
+}

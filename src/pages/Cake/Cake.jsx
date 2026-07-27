@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/Cake.css";
 import "../../styles/firework.css";
 
@@ -139,7 +140,7 @@ function CakeAnimation() {
 
         const BTN = q(".birthday-button__button");
         const EYES = q(".cake__eyes");
-        const bodyEl = scope; // apply CSS vars to scope instead of body
+        const bodyEl = scope;
 
         const BLINK = (eyes) => {
           gsap.set(eyes, { scaleY: 1 });
@@ -346,7 +347,6 @@ function CakeAnimation() {
           .add(FLAME_TL())
           .add(LIGHTS_OUT());
 
-        // auto-play the show
         MASTER_TL.play();
       } catch (e) {
         console.error("Cake animation error:", e);
@@ -424,7 +424,7 @@ function CakeAnimation() {
                 ></rect>
               </clipPath>
               <clipPath id="frosting-clip">
-                <path d="m 58.311339,159.19367 c -1.915439,0 -3.331523,2.04311 -3.986711,3.74446 -0.778328,2.02111 -0.761971,4.73695 0.529167,6.47582 0.861406,1.16012 2.614079,1.3182 4.033715,1.5875 1.321013,0.25059 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344571,0 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344571,0 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344573,0 2.689143,0 4.033713,0 1.34457,0 2.68915,0 4.03372,0 1.34457,0 2.68914,0 4.03371,0 1.34457,0 2.71271,0.25059 4.03372,0 1.41963,-0.2693 3.17231,-0.42738 4.03371,-1.5875 1.29114,-1.73887 1.3075,-4.45471 0.52917,-6.47582 -0.65519,-1.70135 -2.07128,-3.74446 -3.98672,-3.74446 z"></path>
+                <path d="m 58.311339,159.19367 c -1.915439,0 -3.331523,2.04311 -3.986711,3.74446 -0.778328,2.02111 -0.761971,4.73695 0.529167,6.47582 0.861406,1.16012 2.614079,1.3182 4.033715,1.5875 1.321013,0.25059 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344571,0 2.689143,0 4.033714,0 1.344572,0 2.689143,0 4.033715,0 1.344572,0 2.689143,0 4.033715,0 1.344573,0 2.689143,0 4.033713,0 1.34457,0 2.68915,0 4.03372,0 1.34457,0 2.68914,0 4.03371,0 1.34457,0 2.71271,0.25059 4.03372,0 1.41963,-0.2693 3.17231,-0.42738 4.03371,-1.5875 1.29114,-1.73887 1.3075,-4.45471 0.52917,-6.47582 -0.65519,-1.70135 -2.07128,-3.74446 -3.98672,-3.74446 z"></path>
               </clipPath>
               <g id="sprinkles" transform="translate(63.93)">
                 {[
@@ -550,6 +550,40 @@ function CakeAnimation() {
 }
 
 /* ------------------------------------------------------------
+   NEW: Gift Prompt Box (below the cake)
+   ------------------------------------------------------------ */
+function GiftPrompt() {
+  const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // Delay the appearance so it shows AFTER the cake animation kicks in
+    const t = setTimeout(() => setVisible(true), 1500);
+    return () => clearTimeout(t);
+  }, []);
+
+  const handleClick = () => {
+    // small fade-out before navigation
+    setVisible(false);
+    setTimeout(() => navigate("/gift"), 600);
+  };
+
+  return (
+    <div className={`gift-prompt ${visible ? "gift-prompt--visible" : ""}`}>
+      <p className="gift-prompt__text">It&apos;s gift time now. Wanna see it ?</p>
+      <button
+        className="gift-prompt__button"
+        onClick={handleClick}
+        data-testid="open-surprises-btn"
+      >
+        <span className="gift-prompt__button-text">click me to open surprises</span>
+        <span className="gift-prompt__sparkle">✨</span>
+      </button>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------
    Main Cake page
    ------------------------------------------------------------ */
 export default function Cake() {
@@ -567,6 +601,7 @@ export default function Cake() {
         <>
           <FireworkBackground />
           <CakeAnimation />
+          <GiftPrompt />
         </>
       )}
     </div>
