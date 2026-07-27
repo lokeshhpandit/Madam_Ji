@@ -570,7 +570,7 @@ function GiftPrompt() {
 
   return (
     <div className={`gift-prompt ${visible ? "gift-prompt--visible" : ""}`}>
-      <p className="gift-prompt__text">It&apos;s gift time now. Wanna see it ?</p>
+      <p className="gift-prompt__text">It&apos;s gift time now love. Wanna see it ?</p>
       <button
         className="gift-prompt__button"
         onClick={handleClick}

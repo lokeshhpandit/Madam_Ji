@@ -152,7 +152,7 @@ const CatchHeart = () => {
               </p>
               <p className="catch-reveal-signature">
                 <PartyPopper size={16} color="#ff4d7a" />
-                <span>Made with love, just for you</span>
+                <span>I Love You Mansi urff meri Radha</span>
                 <Heart size={14} fill="#ff4d7a" color="#ff4d7a" />
               </p>
               <div className="catch-reveal-actions">

@@ -12,8 +12,10 @@ import "../../styles/HeartCursorTrail.css";
  *   lifespan – how long each heart lives in ms (default 1200)
  */
 export default function HeartCursorTrail({
-  density = 18,
-  colors = ["#ff4d8f", "#ff6b9d", "#ff8fab", "#ffb3c6", "#ff5e94", "#e91e63"],
+  // density = 18,
+  density = 32,
+  // colors = ["#ff4d8f", "#ff6b9d", "#ff8fab", "#ffb3c6", "#ff5e94", "#e91e63"],
+  colors = ["#ff9ec7","#ffb3d9","#ffc1e3","#f8a5d6","#ff8fc1","#ff6fae",],
   lifespan = 1200,
 }) {
   useEffect(() => {
@@ -21,7 +23,8 @@ export default function HeartCursorTrail({
     let lastY = 0;
     let firstMove = true;
 
-    const HEARTS = ["♥", "❤", "💖", "💗", "💓"];
+    // const HEARTS = ["♥", "❤", "💖", "💗", "💓"];
+    const HEARTS = ["♡", "♥"];
 
     const spawnHeart = (x, y) => {
       const heart = document.createElement("span");
@@ -29,7 +32,8 @@ export default function HeartCursorTrail({
       heart.textContent = HEARTS[Math.floor(Math.random() * HEARTS.length)];
 
       // Random visual variation
-      const size = 14 + Math.random() * 18;         // 14 – 32 px
+      // const size = 14 + Math.random() * 18;         // 14 – 32 px
+      const size = 10 + Math.random() * 8; // 10–18 px
       const drift = (Math.random() - 0.5) * 80;     // horizontal drift
       const rise = 40 + Math.random() * 60;         // upward travel
       const rot = (Math.random() - 0.5) * 60;       // rotation

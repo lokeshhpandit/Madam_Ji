@@ -12,16 +12,15 @@ const GIFTS = [
 
 // Message split into lines, then lines split into words for staggered drop-in
 const MESSAGE_LINES = [
-  "Inside these gifts is my love, my prayers & my forever smile for you......",
-  "Each little box carries a tiny piece of my heart,",
-  "wrapped with wishes that will keep you glowing, no matter how far apart. 💫",
+  "Inside these gifts is my love & my prayers....🐥🐥",
+  " Wrapped with love, tied with care ",
+  "A little surprise I'd love to share",
+  "May this gift bring joy to you, Happy Birthday my Love",
+  "I really hope — all your dreams come true 💫",
+  "",
 ];
 
-/* ------------------------------------------------------------
-   Module-level state (lives OUTSIDE the component):
-   - Navigating between routes preserves it (JS module stays alive).
-   - A full page refresh reloads the module -> Set is empty again.
-   ------------------------------------------------------------ */
+
 const openedGifts = new Set();
 
 function GiftBox({ gift, opened, onOpen }) {
@@ -132,10 +131,10 @@ export default function Gifts() {
           ← Back to the cake
         </button>
         <h1 className="gifts-title" data-testid="gifts-title">
-          Your Birthday Gifts
+          Your Birthday Gifts 🐣
         </h1>
         <p className="gifts-subtitle" data-testid="gifts-subtitle">
-          Tap a box to unwrap your surprise ✨
+          From your Chuza  🐣✨
         </p>
       </header>
 
