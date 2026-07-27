@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;600&display=swap");
+
+.giftone-root {
+  --gt-bg: #0f0d0b;
+  --gt-fg: #f5efe6;
+  --gt-fg-dim: rgba(245, 239, 230, 0.72);
+  --gt-accent: #e6b566;
+  --gt-accent-soft: #f2d6a4;
+  --gt-card-radius: 18px;
+  --gt-serif: "Fraunces", "Playfair Display", Georgia, serif;
+  --gt-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--gt-bg);
+  color: var(--gt-fg);
+  font-family: var(--gt-sans);
+  isolation: isolate;
+}
+
+/* Background stage */
+.giftone-stage { position: absolute; inset: 0; z-index: 0; overflow: hidden; animation: gt-fade-in 900ms ease both; }
+.giftone-stage-media {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  filter: saturate(1.05) contrast(1.02); animation: gt-kenburns 12s ease-out both;
+}
+.giftone-stage-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(15,13,11,0.85) 0%, rgba(15,13,11,0.55) 35%, rgba(15,13,11,0.15) 60%, rgba(15,13,11,0) 80%),
+    linear-gradient(180deg, rgba(15,13,11,0.55) 0%, rgba(15,13,11,0) 25%, rgba(15,13,11,0) 65%, rgba(15,13,11,0.7) 100%);
+}
+@keyframes gt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gt-kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+/* Header */
+.giftone-header { position: absolute; top: 0; left: 0; right: 0; z-index: 3; padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; }
+.giftone-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--gt-fg); font-family: var(--gt-sans); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; font-size: 12px; }
+.giftone-brand-icon { color: var(--gt-accent); }
+
+/* Left content */
+.giftone-content {
+  position: absolute; left: 48px; top: 50%; transform: translateY(-50%);
+  z-index: 3; max-width: 620px;
+  animation: gt-slide-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.giftone-accent-line { display: block; width: 60px; height: 3px; background: var(--gt-accent); margin-bottom: 22px; border-radius: 999px; }
+.giftone-eyebrow {
+  font-family: var(--gt-sans);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gt-accent-soft);
+  margin: 0 0 20px;
+}
+.giftone-title {
+  font-family: var(--gt-serif); font-weight: 800;
+  font-size: clamp(56px, 8vw, 118px); line-height: 0.9; letter-spacing: -0.02em;
+  margin: 0 0 26px; color: var(--gt-fg); text-shadow: 0 6px 30px rgba(0,0,0,0.35);
+}
+.giftone-subtitle {
+  font-family: var(--gt-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--gt-fg);
+  margin: 0;
+  max-width: 560px;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+}
+@keyframes gt-slide-in { from { opacity: 0; transform: translate(-16px, calc(-50% + 8px)); } to { opacity: 1; transform: translate(0, -50%); } }
+
+
+/* Preview cards */
+.giftone-cards {
+  position: absolute;
+  right: 48px;
+  bottom: 110px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;                /* real gap — no more overlap */
+}
+
+.giftone-card {
+  --card-w: 130px;
+  --card-h: 190px;
+
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--card-w);
+  height: var(--card-h);
+  border: 0;
+  padding: 0;
+  border-radius: var(--gt-card-radius);
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a1613;
+  box-shadow:
+  0 16px 32px -12px rgba(0, 0, 0, 0.55),
+  0 4px 14px -6px rgba(0, 0, 0, 0.4);
+  transform: translateY(0);
+  transition: transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1),
+  box-shadow 320ms ease;
+  animation: gt-card-slide-in 650ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: calc(var(--i) * 110ms);   /* stagger creates the cascade */
+  z-index: calc(10 - var(--i));
+}
+
+
+.giftone-card:hover, .giftone-card:focus-visible {
+  transform: translateY(-14px);
+  box-shadow: 0 28px 48px -14px rgba(0,0,0,0.65), 0 10px 22px -6px rgba(230,181,102,0.25);
+  outline: none;
+}
+
+.giftone-card-media { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; filter: saturate(1.05); }
+.giftone-card-accent { position: absolute; top: 16px; left: 16px; width: 34px; height: 3px; background: var(--gt-fg); border-radius: 999px; opacity: 0.9; }
+.giftone-card-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 12px 12px;   /* tighter padding */
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+.giftone-card-caption {
+  font-family: var(--gt-sans);
+  font-size: 9px;            /* was 11px */
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gt-fg-dim);
+}
+
+.giftone-card-title {
+  font-family: var(--gt-serif);
+  font-weight: 700;
+  font-size: 14px;           /* was 18px */
+  color: var(--gt-fg);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.giftone-card-badge { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; border-radius: 999px; background: rgba(15,13,11,0.7); color: var(--gt-fg); font-size: 10px; display: grid; place-items: center; backdrop-filter: blur(6px); }
+@keyframes gt-card-slide-in {
+  0% {
+    opacity: 0;
+    transform: translate(120px, 0) scale(0.94);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Footer */
+.giftone-footer { position: absolute; left: 48px; right: 48px; bottom: 40px; z-index: 3; display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; }
+.giftone-controls { display: inline-flex; gap: 12px; }
+.giftone-nav-btn {
+  width: 48px; height: 48px; border-radius: 999px;
+  border: 1px solid rgba(245,239,230,0.35); background: rgba(15,13,11,0.35);
+  color: var(--gt-fg); display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px);
+  transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.giftone-nav-btn:hover { background: rgba(230,181,102,0.18); border-color: var(--gt-accent); transform: translateY(-2px); }
+.giftone-progress { height: 3px; width: 100%; background: rgba(245,239,230,0.18); border-radius: 999px; overflow: hidden; position: relative; }
+.giftone-progress-fill { position: absolute; inset: 0; transform-origin: left center; transform: scaleX(0); background: linear-gradient(90deg, var(--gt-accent) 0%, var(--gt-accent-soft) 100%); border-radius: 999px; transition: transform 120ms linear; }
+.giftone-counter { font-family: var(--gt-serif); font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: var(--gt-fg); display: inline-flex; align-items: baseline; gap: 6px; line-height: 1; }
+.giftone-counter-sep { color: var(--gt-fg-dim); font-size: 24px; transform: translateY(-4px); }
+.giftone-counter-total { color: var(--gt-fg-dim); font-size: 24px; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .giftone-cards { bottom: 80px; right: 32px; gap: 12px; }
+  .giftone-card  { --card-w: 115px; --card-h: 170px; }
+}
+
+@media (max-width: 900px) {
+  .giftone-header  { padding: 20px 24px; }
+  .giftone-content { left: 24px; right: 24px; max-width: none; }
+  .giftone-title   { font-size: clamp(44px, 12vw, 72px); }
+  .giftone-cards {
+    right: 24px; left: 24px; bottom: 130px;
+    justify-content: flex-end;
+    overflow-x: auto; overflow-y: hidden;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    gap: 10px;
+  }
+  .giftone-cards::-webkit-scrollbar { display: none; }
+  .giftone-card    { --card-w: 130px; --card-h: 190px; }
+  .giftone-footer  { left: 24px; right: 24px; bottom: 24px; gap: 16px; }
+  .giftone-counter { font-size: 28px; }
+  .giftone-counter-sep, .giftone-counter-total { font-size: 18px; }
+}
+
+@media (max-width: 560px) {
+  .giftone-cards { bottom: 120px; gap: 8px; }
+  .giftone-card  { --card-w: 110px; --card-h: 160px; }
+  .giftone-nav-btn { width: 40px; height: 40px; }
+}
+
+.giftone-mute-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 239, 230, 0.35);
+  background: rgba(15, 13, 11, 0.35);
+  color: var(--gt-fg);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  margin-left: 8px;
+  transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.giftone-mute-btn:hover {
+  background: rgba(230, 181, 102, 0.18);
+  border-color: var(--gt-accent);
+  transform: translateY(-2px);
+}

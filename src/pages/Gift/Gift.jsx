@@ -4,10 +4,10 @@ import "../../styles/Gifts.css";
 import HeartCursorTrail from "../../components/HeartCursorTrail/HeartCursorTrail";
 
 const GIFTS = [
-  { id: 1, path: "/gift-one",   color: "#ff6b9d", ribbon: "#fff1c1", emoji: "💖" },
-  { id: 2, path: "/gift-two",   color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟" },
-  { id: 3, path: "/gift-three", color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂" },
-  { id: 4, path: "/gift-four",  color: "#ffb347", ribbon: "#ffe0f0", emoji: "🎈" },
+  { id: 1, path: "/gift/1",   color: "#ff6b9d", ribbon: "#fff1c1", emoji: "💖" },
+  { id: 2, path: "/gift/2",   color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟" },
+  { id: 3, path: "/gift/3", color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂" },
+  { id: 4, path: "/gift/4",  color: "#ffb347", ribbon: "#ffe0f0", emoji: "🎈" },
 ];
 
 // Message split into lines, then lines split into words for staggered drop-in
@@ -131,7 +131,7 @@ export default function Gifts() {
           ← Back to the cake
         </button>
         <h1 className="gifts-title" data-testid="gifts-title">
-          Your Birthday Gifts 🐣
+          Your 24th Birthday Gifts 🐣
         </h1>
         <p className="gifts-subtitle" data-testid="gifts-subtitle">
           From your Chuza  🐣✨
