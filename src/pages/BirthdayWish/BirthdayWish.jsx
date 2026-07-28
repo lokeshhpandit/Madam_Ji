@@ -1,10 +1,11 @@
 import "../../styles/birthdayWish.css";
 import { FaHeart } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
 
 function BirthdayWish() {
   const navigate = useNavigate();
+  const musicRef = useRef(null);
 
   useEffect(() => {
     document.body.style.background = "#feecea";
@@ -13,6 +14,23 @@ function BirthdayWish() {
     return () => {
       document.body.style.background = "";
       document.documentElement.style.background = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (musicRef.current) {
+      musicRef.current.volume = 0.5;
+
+      musicRef.current.play().catch(() => {
+        console.log("Autoplay blocked by browser");
+      });
+    }
+
+    return () => {
+      if (musicRef.current) {
+        musicRef.current.pause();
+        musicRef.current.currentTime = 0;
+      }
     };
   }, []);
 
@@ -52,6 +70,13 @@ function BirthdayWish() {
 
   return (
     <div id="wrapper">
+      {/* BACKGROUND MUSIC  */}
+      <audio
+        ref={musicRef}
+        src="/music/birthday.mp3"
+        loop
+        preload="auto"
+      />
       {/* FLAGS */}
       <div className="flag__birthday">
         <img src="/images/birthday/1.png" alt="" width="350" className="flag__left" />

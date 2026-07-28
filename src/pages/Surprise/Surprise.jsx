@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Surprise.css";
@@ -37,6 +37,26 @@ const buildDecor = () => {
 
 const Surprise = () => {
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+
+    useEffect(() => {
+      const playSong = async () => {
+        try {
+          await audioRef.current.play();
+        } catch (error) {
+          console.log("Autoplay blocked by browser");
+        }
+      };
+
+      playSong();
+
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
+      };
+    }, []);
 
   // Lazy initializers -> pure during render (only runs once at mount).
   const [{ hearts, balloons }] = useState(buildDecor);
@@ -46,7 +66,14 @@ const Surprise = () => {
   };
 
   return (
-    <div className="surprise-root">
+    <div className="surprise-root"> 
+      {/* BACKGROUND MUSIC */}
+      <audio
+        ref={audioRef}
+        src="/music/lover.mp3"
+        loop
+      />
+
       {/* Floating hearts + balloons */}
       <div className="decor-layer" aria-hidden="true">
         {hearts.map((h) => (
