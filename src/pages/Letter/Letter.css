@@ -1,161 +1,629 @@
-/* Letter.css — basic romantic envelope + letter page */
+/* =====================================================
+   Letter.css — Aesthetic love-letter page
+   Palette: warm cream + blush rose + rose-gold
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Dancing+Script:wght@600;700&display=swap');
+
+:root {
+    --letter-cream: #fbf3e8;
+    --letter-cream-2: #f7e6d5;
+    --letter-blush: #f4c9c4;
+    --letter-blush-deep: #d98a86;
+    --letter-rose: #b7515a;
+    --letter-rose-dark: #7a2a34;
+    --letter-gold: #c99a5b;
+    --letter-gold-light: #e8c78b;
+    --letter-ink: #5a2a30;
+    --letter-ink-soft: #7a4048;
+}
 
 .letter-page {
-  min-height: 100vh;
-  width: 100%;
-  padding: 24px 20px 60px;
-  background:
-    radial-gradient(900px 500px at 20% 0%, #ffd7e4 0%, transparent 60%),
-    linear-gradient(180deg, #fff5f8 0%, #ffd1de 100%);
-  font-family: "Poppins", "Segoe UI", system-ui, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #5a1c34;
-  position: relative;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    color: var(--letter-ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background:
+        radial-gradient(
+            1000px 700px at 20% 15%,
+            #ffe8dc 0%,
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 700px at 85% 90%,
+            #f4c9c4 0%,
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            var(--letter-cream) 0%,
+            var(--letter-cream-2) 60%,
+            #f0d9c5 100%
+        );
+}
+
+/* Paper grain overlay */
+.letter-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.30  0 0 0 0 0.30  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
+    mix-blend-mode: multiply;
+    opacity: 0.09;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Soft vignette */
+.letter-page::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 200px 40px rgba(122, 42, 52, 0.18);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cinzel {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    letter-spacing: 0.12em;
+}
+
+.script {
+    font-family: 'Dancing Script', 'Cormorant Garamond', cursive;
+}
+
+/* ---------------- Header ---------------- */
+.letter-header {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px;
+}
+
+@media (min-width: 768px) {
+    .letter-header {
+        padding: 28px 44px;
+    }
 }
 
 .letter-back-btn {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 105, 145, 0.35);
-  background: rgba(255, 255, 255, 0.75);
-  color: #b81f52;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: transform 0.2s ease, box-shadow 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 22px 10px 10px;
+    border-radius: 9999px;
+    color: var(--letter-cream);
+    background: linear-gradient(
+        135deg,
+        var(--letter-rose),
+        var(--letter-rose-dark)
+    );
+    border: 1.5px solid var(--letter-gold);
+    box-shadow:
+        0 10px 26px rgba(122, 42, 52, 0.35),
+        0 0 0 4px rgba(201, 154, 91, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    transition:
+        gap 0.3s ease,
+        padding 0.3s ease,
+        transform 0.2s ease;
 }
+
 .letter-back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 105, 145, 0.25);
+    gap: 16px;
+    padding-right: 26px;
 }
 
-.envelope {
-  position: relative;
-  width: min(90vw, 420px);
-  height: min(60vw, 280px);
-  cursor: pointer;
-  transition: transform 0.4s ease;
-}
-.envelope:hover:not(.opened) { transform: translateY(-4px); }
-
-.envelope-body {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #ff8fb1 0%, #ff5c8a 100%);
-  border-radius: 12px;
-  box-shadow: 0 24px 60px rgba(255, 45, 109, 0.35);
-  overflow: hidden;
-  z-index: 2;
-}
-.envelope-body::before,
-.envelope-body::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 55%;
-  height: 100%;
-  background: linear-gradient(135deg, #ff7fa3 0%, #ff4d7f 100%);
-}
-.envelope-body::before {
-  left: 0;
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-}
-.envelope-body::after {
-  right: 0;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-.envelope-heart {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 48px;
-  z-index: 3;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
-  animation: letter-beat 1.2s ease-in-out infinite;
+.letter-back-btn:active {
+    transform: scale(0.96);
 }
 
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(135deg, #ffb3c8 0%, #ff8fb1 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top center;
-  transition: transform 0.7s cubic-bezier(0.7, -0.2, 0.4, 1.2);
-  z-index: 4;
-  border-radius: 12px 12px 0 0;
-}
-.envelope.opened .envelope-flap {
-  transform: rotateX(180deg);
-  z-index: 1;
+.letter-back-btn__icon {
+    display: flex;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--letter-rose-dark);
+    background: radial-gradient(
+        circle at 30% 30%,
+        var(--letter-gold-light),
+        var(--letter-gold) 70%
+    );
+    box-shadow:
+        inset 0 0 0 1px var(--letter-gold-light),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
-.letter-paper {
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translate(-50%, 0) scale(0.6);
-  width: 90%;
-  background: #fffaf7;
-  border-radius: 10px;
-  padding: 24px 22px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s,
-    opacity 0.6s ease 0.35s, bottom 0.9s ease 0.25s;
-  text-align: center;
-  z-index: 3;
+.letter-back-btn:hover .letter-back-btn__icon {
+    transform: translateX(-2px) scale(1.08);
 }
-.envelope.opened .letter-paper {
-  opacity: 1;
-  transform: translate(-50%, 40%) scale(1);
-  bottom: 50%;
-  pointer-events: auto;
+
+.letter-back-btn__text {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.letter-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: var(--letter-rose);
+}
+
+.letter-header-title svg {
+    color: var(--letter-gold);
+}
+
+/* ---------------- Stage ---------------- */
+.letter-stage {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 24px 40px;
+    min-height: calc(100vh - 88px);
+}
+
+/* Title */
+.letter-title-wrap {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.letter-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    color: var(--letter-gold);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .letter-title {
-  font-size: 26px;
-  margin: 0 0 12px;
-  color: #b81f52;
-  font-weight: 800;
-}
-.letter-text {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #6a2140;
-  margin: 0 0 10px;
-  font-style: italic;
-}
-.letter-sign {
-  margin-top: 12px;
-  font-weight: 700;
-  color: #b81f52;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(28px, 5vw, 46px);
+    color: var(--letter-rose-dark);
+    text-shadow: 0 2px 30px rgba(122, 42, 52, 0.15);
+    margin: 0;
+    line-height: 1.15;
 }
 
-.letter-hint {
-  margin-top: 32px;
-  color: #a63a63;
-  font-size: 15px;
-  animation: letter-pulse 1.8s ease-in-out infinite;
+.letter-title-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+    color: var(--letter-gold);
 }
 
-@keyframes letter-beat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+.letter-title-divider .line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--letter-gold),
+        transparent
+    );
 }
-@keyframes letter-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+
+/* ---------------- Envelope reveal ---------------- */
+.letter-envelope-wrap {
+    position: relative;
+    perspective: 1200px;
+    margin: 24px 0 32px;
+}
+
+.letter-envelope {
+    position: relative;
+    width: 260px;
+    height: 170px;
+    background: linear-gradient(
+        160deg,
+        var(--letter-blush),
+        var(--letter-blush-deep)
+    );
+    border-radius: 12px;
+    box-shadow:
+        0 30px 60px -18px rgba(122, 42, 52, 0.45),
+        inset 0 0 0 1.5px var(--letter-gold);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.letter-envelope__flap {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 100%;
+    clip-path: polygon(0 0, 100% 0, 50% 65%);
+    background: linear-gradient(
+        160deg,
+        #ecb3ae,
+        var(--letter-blush-deep)
+    );
+    border-radius: 12px 12px 0 0;
+    transform-origin: top;
+    transition:
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.6s ease;
+    z-index: 3;
+}
+
+.letter-envelope.is-open .letter-envelope__flap {
+    transform: rotateX(-180deg);
+    opacity: 0.95;
+}
+
+.letter-envelope__seal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: radial-gradient(
+        circle at 30% 30%,
+        #e77076,
+        var(--letter-rose) 60%,
+        var(--letter-rose-dark)
+    );
+    box-shadow:
+        0 4px 14px rgba(122, 42, 52, 0.45),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff2f1;
+    transition: opacity 0.4s ease 0.3s;
+}
+
+.letter-envelope.is-open .letter-envelope__seal {
+    opacity: 0;
+}
+
+.letter-envelope__body {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background:
+        linear-gradient(
+            180deg,
+            #fff6ee 0%,
+            var(--letter-cream) 100%
+        );
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--letter-rose);
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+}
+
+.letter-envelope__hint {
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--letter-rose);
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.75;
+    white-space: nowrap;
+}
+
+.letter-envelope.is-open + .letter-envelope__hint,
+.letter-envelope.is-open .letter-envelope__hint {
+    opacity: 0;
+}
+
+/* ---------------- Paper stage (verses) ---------------- */
+.letter-paper {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    padding: 44px 32px 56px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf3 0%,
+            #fbeadd 100%
+        );
+    box-shadow:
+        0 40px 90px -30px rgba(122, 42, 52, 0.35),
+        0 0 0 1px rgba(201, 154, 91, 0.35),
+        inset 0 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+@media (min-width: 768px) {
+    .letter-paper {
+        padding: 60px 56px 72px;
+    }
+}
+
+/* Corner flourishes */
+.letter-paper__corner {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    color: var(--letter-gold);
+    opacity: 0.85;
+}
+
+.letter-paper__corner.tl {
+    top: 10px;
+    left: 10px;
+}
+
+.letter-paper__corner.tr {
+    top: 10px;
+    right: 10px;
+    transform: scaleX(-1);
+}
+
+.letter-paper__corner.bl {
+    bottom: 10px;
+    left: 10px;
+    transform: scaleY(-1);
+}
+
+.letter-paper__corner.br {
+    bottom: 10px;
+    right: 10px;
+    transform: scale(-1, -1);
+}
+
+/* Verse stage */
+.letter-verse-stage {
+    position: relative;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 4px;
+}
+
+@media (min-width: 768px) {
+    .letter-verse-stage {
+        min-height: 260px;
+    }
+}
+
+.letter-verse {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+}
+
+.letter-verse__text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(20px, 3.2vw, 30px);
+    line-height: 1.55;
+    color: var(--letter-ink);
+    max-width: 620px;
+}
+
+.letter-verse__text .accent {
+    color: var(--letter-rose);
+    font-weight: 600;
+    font-style: normal;
+}
+
+.letter-verse__text .heart {
+    display: inline-block;
+    color: var(--letter-rose);
+    animation: heart-pulse 1.6s ease-in-out infinite;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+@keyframes heart-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+.letter-verse__signature {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 42px);
+    color: var(--letter-rose-dark);
+    line-height: 1.1;
+}
+
+/* ---------------- Progress + controls ---------------- */
+.letter-progress {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.letter-progress__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: rgba(122, 42, 52, 0.2);
+    transition:
+        width 0.5s ease,
+        background 0.5s ease;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.letter-progress__dot.is-active {
+    width: 26px;
+    background: linear-gradient(
+        90deg,
+        var(--letter-gold),
+        var(--letter-rose)
+    );
+}
+
+.letter-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+
+.letter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    border: 1.5px solid var(--letter-gold);
+    background: linear-gradient(
+        135deg,
+        #fff8ec,
+        var(--letter-cream-2)
+    );
+    color: var(--letter-rose-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow:
+        0 6px 20px rgba(122, 42, 52, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+}
+
+.letter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 26px rgba(122, 42, 52, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.letter-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.letter-btn--primary {
+    background: linear-gradient(
+        135deg,
+        var(--letter-rose),
+        var(--letter-rose-dark)
+    );
+    color: var(--letter-cream);
+    box-shadow:
+        0 10px 26px rgba(122, 42, 52, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ---------------- Floating hearts ---------------- */
+.letter-hearts {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.letter-heart {
+    position: absolute;
+    color: var(--letter-blush-deep);
+    opacity: 0;
+    animation: heart-float linear infinite;
+    filter: drop-shadow(0 2px 6px rgba(122, 42, 52, 0.25));
+}
+
+@keyframes heart-float {
+    0% {
+        transform: translateY(20px) scale(0.6) rotate(-8deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-40vh) scale(1) rotate(6deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-95vh) scale(0.6) rotate(-8deg);
+        opacity: 0;
+    }
+}
+
+/* ---------------- Sparkles ---------------- */
+.letter-sparkles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.letter-sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--letter-gold-light);
+    box-shadow: 0 0 12px var(--letter-gold);
+    animation: sparkle-twinkle ease-in-out infinite;
+}
+
+@keyframes sparkle-twinkle {
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+/* Selection color */
+.letter-page ::selection {
+    background: var(--letter-rose);
+    color: var(--letter-cream);
 }

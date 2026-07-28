@@ -5,8 +5,8 @@ import HeartCursorTrail from "../../components/HeartCursorTrail/HeartCursorTrail
 
 const GIFTS = [
   { id: 1, path: "/gift/1",   color: "#ff6b9d", ribbon: "#fff1c1", emoji: "💖" },
-  { id: 2, path: "/gift/2",   color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟" },
-  { id: 3, path: "/gift/3", color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂" },
+  { id: 2, path: "/gift/3",   color: "#7ec8e3", ribbon: "#ffd6e0", emoji: "🌟" },
+  { id: 3, path: "/gift/2", color: "#c8a2ff", ribbon: "#fff1c1", emoji: "🎂" },
   { id: 4, path: "/gift/4",  color: "#ffb347", ribbon: "#ffe0f0", emoji: "🎈" },
 ];
 
