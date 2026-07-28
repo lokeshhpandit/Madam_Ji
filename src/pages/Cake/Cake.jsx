@@ -570,13 +570,13 @@ function GiftPrompt() {
 
   return (
     <div className={`gift-prompt ${visible ? "gift-prompt--visible" : ""}`}>
-      <p className="gift-prompt__text">It&apos;s gift time now love. Wanna see it ?</p>
+      <p className="gift-prompt__text">Lagta hai kisi ko gifts dekhne ki badi jaldi hai. 😂 Waise bhi itni mehnat ke baad gift to banta hai. 😌 Chalo, dikha hi dete hain. 😁</p>
       <button
         className="gift-prompt__button"
         onClick={handleClick}
         data-testid="open-surprises-btn"
       >
-        <span className="gift-prompt__button-text">click me to open surprises</span>
+        <span className="gift-prompt__button-text">Click kar do ab Madam Ji... warna gift bhi soch raha hai, 'Madam Ji ko interest hi nahi hai.' 🤭🎁</span>
         <span className="gift-prompt__sparkle">✨</span>
       </button>
     </div>

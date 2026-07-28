@@ -9,12 +9,12 @@ import "./GiftOne.css";
  */
 
 const MEDIA = [
-  { id: 1, type: "image", src: "/images/giftOne/1.jpg", title: "Timeless Family Love",    caption: "Moment One"   },
+  { id: 1, type: "image", src: "/images/giftOne/1.jpg", title: "My Safe Place",    caption: "Moment One"   },
   { id: 2, type: "image", src: "/images/giftOne/2.jpg", title: "Forever Home",    caption: "Moment Two"   },
   { id: 3, type: "image", src: "/images/giftOne/3.jpg", title: "Us Against Everything", caption: "Moment Three" },
-  { id: 4, type: "video", src: "/images/giftOne/4.mp4", title: "In Motion",      caption: "Moment Four"  },
+  { id: 4, type: "video", src: "/images/giftOne/4.mp4", title: "First Evening Together",      caption: "Moment Four"  },
   { id: 5, type: "image", src: "/images/giftOne/5.jpg", title: "Do Ghante ❌, Do Saal ✅",      caption: "Moment Five"  },
-  { id: 6, type: "video", src: "/images/giftOne/6.mp4", title: "Together",       caption: "Moment Six"   },
+  { id: 6, type: "video", src: "/images/giftOne/6.mp4", title: "Ladaku Jodi",       caption: "Moment Six"   },
 ];
 
 const IMAGE_DURATION_MS = 8000;

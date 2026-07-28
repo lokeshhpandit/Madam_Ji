@@ -15,7 +15,8 @@ const MESSAGE_LINES = [
   "Inside these gifts is my love & my prayers....🐥🐥",
   " Wrapped with love, tied with care ",
   "A little surprise I'd love to share",
-  "May this gift bring joy to you, Happy Birthday my Love",
+  "May this gift bring joy to you", 
+  "Happy Birthday my Love",
   "I really hope — all your dreams come true 💫",
   "",
 ];
@@ -131,10 +132,10 @@ export default function Gifts() {
           ← Back to the cake
         </button>
         <h1 className="gifts-title" data-testid="gifts-title">
-          Your 24th Birthday Gifts 🐣
+          My 24-Year-Old Drama Queen 👑😏🐣
         </h1>
         <p className="gifts-subtitle" data-testid="gifts-subtitle">
-          From your Chuza  🐣✨
+          Please open gifts from your Chuza  🐣✨ (Poem bhi padh lena neeche)
         </p>
       </header>
 

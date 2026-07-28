@@ -10,9 +10,9 @@ import GiftOne from "../pages/Gift/GiftOne";
 import GiftTwo from "../pages/Gift/GiftTwo";
 import GiftThree from "../pages/Gift/GiftThree";
 import GiftFour from "../pages/Gift/GiftFour";
-import LastThing from "../pages/LastThing/LastThing";
+// import LastThing from "../pages/LastThing/LastThing";
 import Letter from "../pages/Letter/Letter";
-import Love from "../pages/Love/Love";
+// import Love from "../pages/Love/Love";
 import HeartCursorTrail from "../components/HeartCursorTrail/HeartCursorTrail.jsx";
 
 function AppRoutes() {
@@ -41,11 +41,11 @@ function AppRoutes() {
 
       <Route path="/gift/4" element={<GiftFour />} />
 
-      <Route path="/last-thing" element={<LastThing />} />
+      {/* <Route path="/last-thing" element={<LastThing />} /> */}
 
       <Route path="/letter" element={<Letter />} />
 
-      <Route path="/love" element={<Love />} />
+      {/* <Route path="/love" element={<Love />} /> */}
 
     </Routes>
     </>

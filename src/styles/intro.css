@@ -1,94 +1,548 @@
-/* ============================= */
-/* Floating Hearts */
-/* ============================= */
+/* ============================================================
+   IntroPage — Teal romantic countdown + glass keypad
+   Fonts: Fraunces (display) + Manrope (body) + Caveat (accent)
+   ============================================================ */
 
-.floating-heart {
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap");
+
+:root {
+  --teal-900: #0b3b3c;
+  --teal-800: #0e5152;
+  --teal-700: #106e6b;
+  --teal-500: #1aa39a;
+  --teal-300: #7de3d8;
+  --cream: #fff7ec;
+  --pink: #ff6b9a;
+  --pink-soft: #ffc4d6;
+  --gold: #ffd76b;
+  --coral: #ff8a5b;
+}
+
+.intro-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  color: var(--cream);
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(1200px 700px at 15% 10%, rgba(125, 227, 216, 0.28), transparent 60%),
+    radial-gradient(900px 600px at 85% 85%, rgba(255, 107, 154, 0.22), transparent 60%),
+    linear-gradient(135deg, #062f31 0%, #0b4c4a 45%, #106e6b 100%);
+  padding: 36px 28px 60px;
+  box-sizing: border-box;
+  isolation: isolate;
+}
+
+/* Subtle grain */
+.intro-root::before {
+  content: "";
   position: absolute;
-  bottom: -80px;
-  color: rgba(255, 70, 120, 0.9);
+  inset: 0;
   pointer-events: none;
-  user-select: none;
-  filter:
-    drop-shadow(0 0 8px rgba(255, 80, 140, 0.8))
-    drop-shadow(0 0 18px rgba(255, 80, 140, 0.5));
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
 
-  animation-name: floatHeart;
+/* -----------------------------  Hearts  ------------------------ */
+.hearts-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.heart {
+  position: absolute;
+  bottom: -30px;
+  color: var(--pink-soft);
+  text-shadow: 0 0 12px rgba(255, 180, 200, 0.6);
+  animation-name: heart-rise;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   will-change: transform, opacity;
 }
-
-@keyframes floatHeart {
+@keyframes heart-rise {
   0% {
-    transform: translateY(0) scale(0.4) rotate(0deg);
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.9);
     opacity: 0;
   }
-
   10% {
     opacity: 1;
   }
-
-  90% {
-    opacity: 1;
+  50% {
+    transform: translateY(-55vh) translateX(20px) rotate(15deg) scale(1);
   }
-
   100% {
-    transform: translateY(-140vh) scale(1.2) rotate(360deg);
+    transform: translateY(-115vh) translateX(-20px) rotate(-10deg) scale(0.7);
     opacity: 0;
   }
 }
 
-
-/* ============================= */
-
-.photoGlow{
-
-    animation:glow 4s ease-in-out infinite;
-
+/* -----------------------------  Photo card  -------------------- */
+.photo-wrap {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+.photo-card {
+  background: #fff;
+  padding: 18px 18px 14px;
+  border-radius: 14px;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  animation: bob 5.5s ease-in-out infinite;
+  transform: rotate(-1.5deg);
+  max-width: 260px;
+  width: 100%;
+}
+.photo-inner {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #eee;
+  display: block;
+}
+.photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-caption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Caveat", cursive;
+  font-size: 24px;
+  color: #d4386b;
+  letter-spacing: 0.5px;
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
 }
 
-@keyframes glow{
-
-0%,100%{
-
-transform:scale(1);
-
-opacity:.45;
-
+/* -----------------------------  Layout grid  ------------------- */
+.content-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 42px;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
-50%{
-
-transform:scale(1.15);
-
-opacity:.75;
-
+/* -----------------------------  Countdown  --------------------- */
+.left-panel {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.countdown-block {
+  width: 100%;
+}
+.countdown-title {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--teal-300);
+  margin-bottom: 18px;
+  letter-spacing: 0.3px;
+}
+.countdown-pills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 520px;
+}
+.pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 18px 8px 12px;
+  text-align: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.pill-value {
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.pill-label {
+  margin-top: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.countdown-sub {
+  margin-top: 16px;
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  color: var(--pink-soft);
+  max-width: 520px;
 }
 
+/* -----------------------------  Birthday reveal  --------------- */
+.birthday-block {
+  animation: fade-in 0.9s ease both;
+}
+.hb-eyebrow {
+  font-family: "Caveat", cursive;
+  font-size: 26px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.hb-title {
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.95;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(120deg, #ffd76b 0%, #ff8a5b 45%, #ff6b9a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 30px rgba(255, 138, 91, 0.35));
+}
+.hb-title span:nth-child(1) {
+  font-style: italic;
+  font-weight: 500;
+}
+.hb-title .hb-cake {
+  font-size: 60px;
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: initial;
+  margin-top: 6px;
+}
+.hb-sub {
+  margin-top: 18px;
+  max-width: 460px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.sparkles {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  color: var(--gold);
+  font-size: 22px;
+}
+.sparkles span {
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+.sparkles span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.sparkles span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.sparkles span:nth-child(4) {
+  animation-delay: 0.9s;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
-
-/* ============================= */
-
-.floatImage{
-
-animation:floatImage 5s ease-in-out infinite;
-
+/* -----------------------------  Keypad  ------------------------ */
+.right-panel {
+  display: flex;
+  justify-content: center;
+}
+.keypad-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-radius: 26px;
+  padding: 26px 24px 22px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+.keypad-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.keypad-title {
+  font-family: "Fraunces", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.4px;
+}
+.keypad-hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.5px;
 }
 
-@keyframes floatImage{
-
-0%,100%{
-
-transform:translateY(0px) rotate(-3deg);
-
+.slots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px 0 18px;
+}
+.slot {
+  width: 44px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal-300);
+  font-size: 22px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.slot.filled {
+  background: rgba(125, 227, 216, 0.18);
+  border-color: rgba(125, 227, 216, 0.55);
+  transform: translateY(-2px);
+}
+.slot.slot-wrong {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.14);
+  color: #ff9a9a;
 }
 
-50%{
-
-transform:translateY(-12px) rotate(-2deg);
-
+.keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.key {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: 22px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.key:hover {
+  background: rgba(125, 227, 216, 0.22);
+  border-color: rgba(125, 227, 216, 0.5);
+  box-shadow:
+    0 0 0 4px rgba(125, 227, 216, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.key:active {
+  transform: scale(0.94);
+}
+.key-secondary {
+  background: rgba(255, 107, 154, 0.14);
+  border-color: rgba(255, 107, 154, 0.35);
+  color: var(--pink-soft);
+  font-size: 18px;
+}
+.key-secondary:hover {
+  background: rgba(255, 107, 154, 0.28);
+  border-color: rgba(255, 107, 154, 0.6);
+  box-shadow: 0 0 0 4px rgba(255, 107, 154, 0.1);
 }
 
+/* Shake animation */
+.shake {
+  animation: shake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-3px);
+  }
+  20%,
+  80% {
+    transform: translateX(6px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+}
+
+.emoji-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  font-size: 40px;
+  animation: burst 0.9s ease-out both;
+}
+.emoji-burst span:nth-child(1) {
+  transform: translateY(-20px) rotate(-15deg);
+}
+.emoji-burst span:nth-child(2) {
+  transform: translateY(-40px);
+}
+.emoji-burst span:nth-child(3) {
+  transform: translateY(-20px) rotate(15deg);
+}
+@keyframes burst {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* -----------------------------  Toast  ------------------------- */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 8, 16, 0.85);
+  border: 1px solid rgba(255, 107, 154, 0.5);
+  color: #ffd6e2;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 20;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: toast-in 0.25s ease-out both;
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* -----------------------------  Crackers  ---------------------- */
+.crackers-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.cracker {
+  position: absolute;
+  width: 0;
+  height: 0;
+  animation: cracker-cycle 2.4s ease-out infinite;
+}
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  transform-origin: 3px 3px;
+  animation: spark-fly 2.4s ease-out infinite;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+@keyframes cracker-cycle {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+}
+@keyframes spark-fly {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--rot, 0deg)) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--rot, 0deg)) translateY(-90px) scale(0.4);
+  }
 }

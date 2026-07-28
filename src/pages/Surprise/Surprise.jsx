@@ -3,10 +3,6 @@ import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Surprise.css";
 
-// Deterministic pseudo-random helper (seedable) so React purity rules are respected.
-// We call it inside a lazy useState initializer so it runs exactly ONCE per mount,
-// avoiding React 19's "impure function during render" warning caused by Math.random
-// inside useMemo.
 const seededRandom = (seed) => {
   let s = seed % 2147483647;
   if (s <= 0) s += 2147483646;
@@ -95,15 +91,17 @@ const Surprise = () => {
           <div className="card-inner">
             <h1 className="card-title">Hey Beautiful</h1>
             <p className="card-message">
-              Today is not just another day. It is the day my favorite person
-              came into this world.
+              Every birthday tells a story,<br />
+              Yours is my favorite chapter yet.<br />
+              This surprise is only a small reminder,<br />
+              Of a heart that will never forget. 💖<br />
             </p>
             <button
               type="button"
               onClick={handleOpen}
               className="open-btn"
             >
-              <span>Open Your Surprise</span>
+              <span>Open Your Surprise Love</span>
               <Heart size={16} fill="#ff4d7a" color="#ff4d7a" />
             </button>
           </div>

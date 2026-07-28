@@ -10,8 +10,7 @@ const chapters = [
     title: ["The", "Glance"],
     caption: "a love told without words",
     image:
-      "https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=1800&q=80",
-    // where on screen the text block sits
+      "/images/giftTwo/1.png",
     position: "top-left",
   },
   {

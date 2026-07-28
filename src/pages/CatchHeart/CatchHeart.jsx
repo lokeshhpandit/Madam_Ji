@@ -100,7 +100,7 @@ const CatchHeart = () => {
         <div className={`catch-card ${showReveal ? "catch-card--reveal" : ""}`}>
           {!showReveal ? (
             <>
-              <h1 className="catch-title">First, catch my heart</h1>
+              <h1 className="catch-title">Not So Fast, Birthday Girl !😁🎂 First, catch my heart 🫣</h1>
               <p className="catch-subtitle">
                 Click the floating heart {TARGET} times to unlock your
                 birthday wish.
@@ -144,15 +144,15 @@ const CatchHeart = () => {
                 <Sparkles size={26} color="#ffb703" />
                 <Gift size={28} color="#c56cf0" />
               </div>
-              <h1 className="catch-reveal-title">Happy Birthday!</h1>
+              <h1 className="catch-reveal-title">Happy Birthday Chunni </h1>
               <p className="catch-reveal-message">
-                You caught my heart {TARGET} times, just like you do every
-                single day. May your year ahead be filled with laughter,
-                love, and every little thing that makes you smile.
+                Looks like someone already knows how to play with my heart. 😒💖
+                I knew it! You've been stealing my heart all along, and now you've got proof. 😤💕<br></br>
+                Mission accomplished! You caught my heart 5 times. Now promise you'll handle it gently. 😏❤️
               </p>
               <p className="catch-reveal-signature">
                 <PartyPopper size={16} color="#ff4d7a" />
-                <span>I Love You Mansi urff meri Radha</span>
+                <span>I Love You My Mansi urff meri Radha</span>
                 <Heart size={14} fill="#ff4d7a" color="#ff4d7a" />
               </p>
               <div className="catch-reveal-actions">
@@ -166,14 +166,14 @@ const CatchHeart = () => {
                   }}
                 >
                   <Sparkles size={16} />
-                  <span>Play again</span>
+                  <span>Play again (Please Don't 🥲) </span>
                 </button>
                 <button
                   type="button"
                   className="catch-btn-ghost"
                   onClick={() => navigate("/Cake")}
                 >
-                  Let's cut the cake
+                  Let's cut the cake baby 🎂
                 </button>
               </div>
             </div>

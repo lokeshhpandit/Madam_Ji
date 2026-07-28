@@ -308,7 +308,7 @@ export default function GiftThree({ recipientName = "My Love" }) {
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
   const [imgLoaded, setImgLoaded] = useState(false);
-  const [imgSrc, setImgSrc] = useState("/images/giftThree/GiftThree.jpg");
+  const [imgSrc, setImgSrc] = useState("/images/giftThree/giftThree.png");
   const [videoErrored, setVideoErrored] = useState(false);
 
   // Try attempt autoplay on mount
@@ -441,7 +441,7 @@ export default function GiftThree({ recipientName = "My Love" }) {
                     data-testid="gift-three-video"
                     className="h-full w-full object-cover"
                     src="/videos/giftThree/video wish 2.mp4"
-                    poster="/images/giftThree/GiftThree.jpg"
+                    poster="/images/giftThree/giftThree.png"
                     playsInline
                     loop
                     autoPlay
