@@ -1,0 +1,161 @@
+/* Letter.css — basic romantic envelope + letter page */
+
+.letter-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px 20px 60px;
+  background:
+    radial-gradient(900px 500px at 20% 0%, #ffd7e4 0%, transparent 60%),
+    linear-gradient(180deg, #fff5f8 0%, #ffd1de 100%);
+  font-family: "Poppins", "Segoe UI", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #5a1c34;
+  position: relative;
+}
+
+.letter-back-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 105, 145, 0.35);
+  background: rgba(255, 255, 255, 0.75);
+  color: #b81f52;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+.letter-back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 105, 145, 0.25);
+}
+
+.envelope {
+  position: relative;
+  width: min(90vw, 420px);
+  height: min(60vw, 280px);
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.envelope:hover:not(.opened) { transform: translateY(-4px); }
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff8fb1 0%, #ff5c8a 100%);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(255, 45, 109, 0.35);
+  overflow: hidden;
+  z-index: 2;
+}
+.envelope-body::before,
+.envelope-body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff7fa3 0%, #ff4d7f 100%);
+}
+.envelope-body::before {
+  left: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+.envelope-body::after {
+  right: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.envelope-heart {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 48px;
+  z-index: 3;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+  animation: letter-beat 1.2s ease-in-out infinite;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(135deg, #ffb3c8 0%, #ff8fb1 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.7, -0.2, 0.4, 1.2);
+  z-index: 4;
+  border-radius: 12px 12px 0 0;
+}
+.envelope.opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.letter-paper {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%, 0) scale(0.6);
+  width: 90%;
+  background: #fffaf7;
+  border-radius: 10px;
+  padding: 24px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s,
+    opacity 0.6s ease 0.35s, bottom 0.9s ease 0.25s;
+  text-align: center;
+  z-index: 3;
+}
+.envelope.opened .letter-paper {
+  opacity: 1;
+  transform: translate(-50%, 40%) scale(1);
+  bottom: 50%;
+  pointer-events: auto;
+}
+
+.letter-title {
+  font-size: 26px;
+  margin: 0 0 12px;
+  color: #b81f52;
+  font-weight: 800;
+}
+.letter-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6a2140;
+  margin: 0 0 10px;
+  font-style: italic;
+}
+.letter-sign {
+  margin-top: 12px;
+  font-weight: 700;
+  color: #b81f52;
+}
+
+.letter-hint {
+  margin-top: 32px;
+  color: #a63a63;
+  font-size: 15px;
+  animation: letter-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes letter-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+@keyframes letter-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
