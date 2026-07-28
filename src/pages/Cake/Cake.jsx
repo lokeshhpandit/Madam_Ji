@@ -588,14 +588,43 @@ function GiftPrompt() {
    ------------------------------------------------------------ */
 export default function Cake() {
   const [phase, setPhase] = useState(1);
+  const crackerRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setPhase(2), 4000);
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => {
+  const playCrackerSound = async () => {
+    try {
+      await crackerRef.current.play();
+    } catch (error) {
+      console.log("Cracker sound blocked:", error);
+    }
+  };
+
+  playCrackerSound();
+
+  return () => {
+    if (crackerRef.current) {
+      crackerRef.current.pause();
+      crackerRef.current.currentTime = 0;
+    }
+  };
+}, []);
+
   return (
     <div className="cake-page" data-testid="cake-page">
+
+      <audio
+        ref={crackerRef}
+        src="/music/cracker.mp3"
+        autoPlay
+        preload="auto"
+        loop
+      />
+
       {phase === 1 && <CandleScene />}
       {phase === 2 && (
         <>
