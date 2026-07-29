@@ -46,7 +46,7 @@ const Surprise = () => {
   //   navigate("/catch-heart");
   // };
   const handleOpen = () => {
-    playMusic("/music/Catch-heart.mp3");
+    // playMusic("/music/Catch-heart.mp3");
     navigate("/catch-heart");
   };
 

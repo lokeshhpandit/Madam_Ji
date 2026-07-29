@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Cake.css";
 import "../../styles/firework.css";
 
-import { playMusic, playSoundEffect } from "../../utils/musicPlayer";
+// import { playMusic, playSoundEffect } from "../../utils/musicPlayer";
+import { playMusic, stopMusic, playSoundEffect } from "../../utils/audioManager";
 
 // Helper: load a script once
 const loadScript = (src) =>
@@ -568,7 +569,7 @@ function GiftPrompt() {
     // small fade-out before navigation
     setVisible(false);
     setTimeout(() => {
-      playMusic("/music/gifts-song.mp3");
+      // playMusic("/music/gifts-song.mp3");
       navigate("/gift");
     }, 600);
   };
@@ -594,8 +595,15 @@ function GiftPrompt() {
 export default function Cake() {
   const [phase, setPhase] = useState(1);
   useEffect(() => {
-  playSoundEffect("/sounds/cracker.mp3");
-}, []);
+    playMusic("/music/cracker.mp3", {
+      loop: true,
+      volume: 0.6,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => setPhase(2), 4000);

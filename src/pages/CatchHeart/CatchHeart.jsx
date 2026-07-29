@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Heart, Cake, Sparkles, Gift, PartyPopper } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/CatchHeart.css";
-import { playMusic } from "../../utils/musicPlayer";
+// import { playMusic } from "../../utils/musicPlayer";
+import { playMusic, stopMusic } from "../../utils/audioManager";
 
 const TARGET = 5;
 
@@ -70,6 +71,17 @@ const CatchHeart = () => {
     });
     moveHeart();
   };
+
+  useEffect(() => {
+    playMusic("/music/Catch-heart.mp3", {
+      loop: true,
+      volume: 0.7,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   const progressPct = Math.min((caught / TARGET) * 100, 100);
 

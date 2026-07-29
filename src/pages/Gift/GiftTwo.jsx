@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-// import { playMusic, stopMusic } from "../../utils/audioManager";
+import { playMusic, stopMusic } from "../../utils/audioManager";
 
 const chapters = [
   {
@@ -208,56 +208,17 @@ const Chapter = ({ data, isFirst, onPrev }) => {
 
 const GiftTwo = () => {
   const navigate = useNavigate();
-  const audioRef = useRef(null);
-
-  // Autoplay music with fade-in; browsers require a user gesture, so we also
-  // start it on first pointer/scroll/key event.
   useEffect(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.volume = 0;
-
-    const fadeIn = () => {
-      const target = 0.35;
-      const step = 0.02;
-      const id = setInterval(() => {
-        if (!audioRef.current) return clearInterval(id);
-        if (audioRef.current.volume >= target - step) {
-          audioRef.current.volume = target;
-          clearInterval(id);
-        } else {
-          audioRef.current.volume = Math.min(1, audioRef.current.volume + step);
-        }
-      }, 90);
-    };
-
-    const tryPlay = () => {
-      a.play()
-        .then(() => fadeIn())
-        .catch(() => {});
-    };
-
-    tryPlay();
-
-    const onInteract = () => {
-      tryPlay();
-      window.removeEventListener("pointerdown", onInteract);
-      window.removeEventListener("keydown", onInteract);
-      window.removeEventListener("wheel", onInteract);
-      window.removeEventListener("touchstart", onInteract);
-    };
-    window.addEventListener("pointerdown", onInteract);
-    window.addEventListener("keydown", onInteract);
-    window.addEventListener("wheel", onInteract, { passive: true });
-    window.addEventListener("touchstart", onInteract, { passive: true });
+    playMusic("/music/giftTwo.mp3", {
+      loop: true,
+      volume: 0.7,
+    });
 
     return () => {
-      window.removeEventListener("pointerdown", onInteract);
-      window.removeEventListener("keydown", onInteract);
-      window.removeEventListener("wheel", onInteract);
-      window.removeEventListener("touchstart", onInteract);
+      stopMusic();
     };
   }, []);
+
 
   return (
     <div
@@ -270,13 +231,7 @@ const GiftTwo = () => {
       }}
     >
       {/* Looping background music — drop your file at this exact path */}
-      <audio
-        ref={audioRef}
-        src="/music/giftFour/giftTwo.mp3"
-        loop
-        preload="auto"
-        data-testid="gift-two-audio"
-      />
+
 
       {chapters.map((c, i) => (
         <Chapter
