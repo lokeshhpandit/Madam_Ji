@@ -236,11 +236,11 @@ const GiftFour = () => {
           </h1>
           <p className="gf-celebration-love">
             You solved it <span className="gf-inline-heart">♥</span> just like
-            you solve every little piece of my heart.
+            you solve every problem of my life. 🥹
           </p>
           <p className="gf-celebration-msg" data-testid="gift-four-last-text">
-            Last but not the least! Wanna see your last surprise? Click the
-            button and have a look
+            Last but not the least!! Wanna see your last surprise? Click the
+            button and have a look love
           </p>
           <button
             className="gf-btn gf-btn-primary gf-next-btn"

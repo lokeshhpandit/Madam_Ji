@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Heart, Cake, Sparkles, Gift, PartyPopper } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/CatchHeart.css";
+import { playMusic } from "../../utils/musicPlayer";
 
 const TARGET = 5;
 
@@ -32,7 +33,6 @@ const buildDecor = () => {
 const CatchHeart = () => {
   const navigate = useNavigate();
   const [{ hearts: decorHearts }] = useState(buildDecor);
-  const audioRef = useRef(null);
 
   const [caught, setCaught] = useState(0);
   const [pos, setPos] = useState({ top: 55, left: 25 });
@@ -54,29 +54,6 @@ const CatchHeart = () => {
     return () => clearInterval(id);
   }, [moveHeart, showReveal]);
 
-  useEffect(() => {
-  const audio = audioRef.current;
-
-  const playSong = async () => {
-    if (!audio) return;
-
-    try {
-      audio.volume = 0.5; // optional, prevents sudden loud sound
-      await audio.play();
-    } catch (error) {
-      console.log("Browser blocked autoplay:", error);
-    }
-  };
-
-  playSong();
-
-  return () => {
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
-}, []);
 
   const handleCatch = (e) => {
     e.stopPropagation();
@@ -98,15 +75,6 @@ const CatchHeart = () => {
 
   return (
     <div className="catch-root">
-      {/* BACKGROUND MUSIC  */}
-      <audio
-        ref={audioRef}
-        src="/music/Catch-heart.mp3"
-        autoPlay
-        preload="auto"
-        loop
-      />
-
 
       {/* Background decor hearts */}
       <div className="catch-decor" aria-hidden="true">
@@ -206,7 +174,11 @@ const CatchHeart = () => {
                 <button
                   type="button"
                   className="catch-btn-ghost"
-                  onClick={() => navigate("/Cake")}
+                  // onClick={() => navigate("/Cake")}
+                  onClick={() => {
+                    playMusic("/music/cracker.mp3");
+                    navigate("/Cake");
+                  }}
                 >
                   Let's cut the cake baby 🎂
                 </button>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { playMusic, stopMusic } from "../../utils/audioManager";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Gifts.css";
 import HeartCursorTrail from "../../components/HeartCursorTrail/HeartCursorTrail";
@@ -84,6 +85,16 @@ function DropInMessage() {
 
 export default function Gifts() {
   const navigate = useNavigate();
+  useEffect(() => {
+    playMusic("/music/gifts-song.mp3", {
+      loop: true,
+      volume: 0.7,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   // Seed React state from the module-level Set so any previously-opened
   // boxes appear opened when the user comes back to this page.

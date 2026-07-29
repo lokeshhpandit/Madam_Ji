@@ -35,10 +35,16 @@ const VERSES = [
     type: "line",
     text: (
       <>
-        Happy Birthday to someone truly special to my heart
-        <span className="heart">
+        Happy Birthday to someone truly special to my heart... <br></br>
+        Meri Radha <br></br>
+        My Little Girl <br></br>
+        My Dear Wife <br></br>
+        My Chunni <br></br>
+        Ullu <br></br>
+
+        {/* <span className="heart">
           <Heart size={22} fill="currentColor" />
-        </span>
+        </span> */}
       </>
     ),
   },
@@ -47,7 +53,7 @@ const VERSES = [
     text: (
       <>
         You are <span className="accent">sweet</span>,{" "}
-        <span className="accent">lovable</span>, my rock — and I&apos;m so grateful
+        <span className="accent">lovable</span>, inspiring — and I&apos;m so grateful
         to have you in my life.
       </>
     ),
@@ -65,8 +71,8 @@ const VERSES = [
     type: "line",
     text: (
       <>
-        On your special day, I wish you all the happiness, love, and joy
-        you deserve — may this year bring you countless beautiful moments.
+        On your special day, I wish may Krishna 🕉 bless you with all the happiness ✨, my love 💞, health, success 👩🏻‍⚕️, joy
+        you deserve — and every dream your heart silently prays for. May this year bring countless beautiful moments to most beautiful wifey.❤️
       </>
     ),
   },
@@ -76,7 +82,7 @@ const VERSES = [
       <>
         Thank you for always being my biggest supporter,
         <br />
-        my safe place, my favourite person.
+        my safe place, my favourite person and my bestest friend. I am so lucky to have you. 🥹
       </>
     ),
   },
@@ -84,7 +90,7 @@ const VERSES = [
     type: "signature",
     text: (
       <>
-        Yours, always
+        No matter what, I will always be here..supporting you , believing in you and wishing you nothing but the best. Yours, Always & Forever
         <div className="letter-verse__signature">— With all my heart</div>
       </>
     ),

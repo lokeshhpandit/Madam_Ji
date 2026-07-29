@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Cake.css";
 import "../../styles/firework.css";
 
+import { playMusic, playSoundEffect } from "../../utils/musicPlayer";
+
 // Helper: load a script once
 const loadScript = (src) =>
   new Promise((resolve, reject) => {
@@ -565,7 +567,10 @@ function GiftPrompt() {
   const handleClick = () => {
     // small fade-out before navigation
     setVisible(false);
-    setTimeout(() => navigate("/gift"), 600);
+    setTimeout(() => {
+      playMusic("/music/gifts-song.mp3");
+      navigate("/gift");
+    }, 600);
   };
 
   return (
@@ -588,43 +593,17 @@ function GiftPrompt() {
    ------------------------------------------------------------ */
 export default function Cake() {
   const [phase, setPhase] = useState(1);
-  const crackerRef = useRef(null);
+  useEffect(() => {
+  playSoundEffect("/sounds/cracker.mp3");
+}, []);
 
   useEffect(() => {
     const t = setTimeout(() => setPhase(2), 4000);
     return () => clearTimeout(t);
   }, []);
 
-  useEffect(() => {
-  const playCrackerSound = async () => {
-    try {
-      await crackerRef.current.play();
-    } catch (error) {
-      console.log("Cracker sound blocked:", error);
-    }
-  };
-
-  playCrackerSound();
-
-  return () => {
-    if (crackerRef.current) {
-      crackerRef.current.pause();
-      crackerRef.current.currentTime = 0;
-    }
-  };
-}, []);
-
   return (
     <div className="cake-page" data-testid="cake-page">
-
-      <audio
-        ref={crackerRef}
-        src="/music/cracker.mp3"
-        autoPlay
-        preload="auto"
-        loop
-      />
-
       {phase === 1 && <CandleScene />}
       {phase === 2 && (
         <>

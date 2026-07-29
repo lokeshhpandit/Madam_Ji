@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
+// import { playMusic, stopMusic } from "../../utils/audioManager";
 
 const chapters = [
   {
@@ -19,25 +20,25 @@ const chapters = [
     title: ["The", "Blush"],
     caption: "and I'm yours",
     image:
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/2.png",
     position: "top-left",
   },
   {
     id: 3,
-    hindi: "HUM RAAT TAARE GINTE",
+    hindi: "HUM RAAH TAAKE BAITHE",
     title: ["The", "Wait"],
     caption: "hoping for a sign",
     image:
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/3.png",
     position: "top-right",
   },
   {
     id: 4,
-    hindi: "TU BAADAL BANKAR AANA",
+    hindi: "she answers",
     title: ["A", "Sign"],
-    caption: "she answers",
+    // caption: "she answers",
     image:
-      "https://images.unsplash.com/photo-1493514789931-586cb221d7a7?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/4.png",
     position: "bottom-right",
   },
   {
@@ -46,7 +47,7 @@ const chapters = [
     title: ["Your", "Hand"],
     caption: "and I'm complete",
     image:
-      "https://images.unsplash.com/photo-1519638399535-1b036603ac77?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/5.png",
     position: "bottom-left",
   },
   {
@@ -55,7 +56,7 @@ const chapters = [
     title: ["As", "One"],
     caption: "and I'll be yours",
     image:
-      "https://images.unsplash.com/photo-1517816428104-797678c7cf0d?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/7.png",
     position: "top-right",
   },
   {
@@ -64,7 +65,7 @@ const chapters = [
     title: ["The", "Café"],
     caption: "eyes do the talking",
     image:
-      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/6.png",
     position: "bottom-left",
   },
   {
@@ -73,7 +74,7 @@ const chapters = [
     title: ["The", "Silence"],
     caption: "I'll read it all",
     image:
-      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1800&q=80",
+      "/images/giftTwo/8.png",
     position: "bottom-right",
   },
 ];
@@ -271,7 +272,7 @@ const GiftTwo = () => {
       {/* Looping background music — drop your file at this exact path */}
       <audio
         ref={audioRef}
-        src="/music/giftFour/gifttFour.mp3"
+        src="/music/giftFour/giftTwo.mp3"
         loop
         preload="auto"
         data-testid="gift-two-audio"
