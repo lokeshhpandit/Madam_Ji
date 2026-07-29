@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./GiftOne.css";
+import { playMusic, stopMusic } from "../../utils/audioManager";
 
 /**
  * GiftOne — "Sweet Moments"
@@ -61,6 +62,17 @@ export default function GiftOne() {
 
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
+
+  useEffect(() => {
+    playMusic("/music/giftOne.mp3", {
+      loop: true,
+      volume: 0.10,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   // Auto-advance + progress
   useEffect(() => {

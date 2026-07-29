@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Surprise.css";
-import { playMusic } from "../../utils/musicPlayer";
+import { playMusic, stopMusic } from "../../utils/musicPlayer";
 
 const seededRandom = (seed) => {
   let s = seed % 2147483647;
@@ -41,12 +41,22 @@ const Surprise = () => {
 
   // Lazy initializers -> pure during render (only runs once at mount).
   const [{ hearts, balloons }] = useState(buildDecor);
+  useEffect(() => {
+    playMusic("/music/lover.mp3", {
+      loop: true,
+      volume: 0.6,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   // const handleOpen = () => {
   //   navigate("/catch-heart");
   // };
   const handleOpen = () => {
-    // playMusic("/music/Catch-heart.mp3");
+    playMusic("/music/Catch-heart.mp3");
     navigate("/catch-heart");
   };
 

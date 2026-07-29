@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { playMusic, stopMusic } from "../../utils/audioManager";
 import {
   ArrowLeft,
   Heart,
@@ -220,6 +221,17 @@ export default function Letter() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    playMusic("/music/letter-song.mp3", {
+      loop: true,
+      volume: 0.35,
+    });
+
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   // Auto-open envelope after a short beat
   useEffect(() => {
