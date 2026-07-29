@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./GiftFour.css";
+import { playMusic } from "../../utils/musicPlayer";
 
 // const PUZZLE_IMAGE =
 //   "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=900&h=900&fit=crop";
@@ -216,7 +217,10 @@ const GiftFour = () => {
     setShowCelebration(false);
   };
 
-  const goToLetter = () => navigate("/letter");
+  const goToLetter = () => {
+    playMusic("/music/letter-song.mp3");
+    navigate("/letter")
+  };
   const goBack = () => navigate("/gift");
 
   /* ---------- Celebration screen (replaces puzzle) ---------- */

@@ -569,7 +569,7 @@ function GiftPrompt() {
     // small fade-out before navigation
     setVisible(false);
     setTimeout(() => {
-      // playMusic("/music/gifts-song.mp3");
+      playMusic("/music/gifts-song.mp3");
       navigate("/gift");
     }, 600);
   };

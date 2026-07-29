@@ -2,6 +2,7 @@ import "../../styles/birthdayWish.css";
 import { FaHeart } from "react-icons/fa";
 import { useEffect, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
+import { playMusic } from "../../utils/audioManager";
 
 function BirthdayWish() {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ function BirthdayWish() {
   }, []);
 
   const handleClickHere = () => {
+    playMusic("/music/lover.mp3");
     navigate("/surprise");
   };
 

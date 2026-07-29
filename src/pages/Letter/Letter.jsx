@@ -225,7 +225,7 @@ export default function Letter() {
   useEffect(() => {
     playMusic("/music/letter-song.mp3", {
       loop: true,
-      volume: 0.35,
+      volume: 0.20,
     });
 
     return () => {
